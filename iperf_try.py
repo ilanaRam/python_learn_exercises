@@ -69,7 +69,7 @@ def reporter_process(my_quque, stoping_msg):
 
 
 if __name__ == "__main__":
-    print("Number of cpus is : ", multiprocessing.cpu_count())
+    print("Number of cpus is: ", multiprocessing.cpu_count())
     my_quque = Queue()
 
     handle_iperf_process_is_running("iperf3.exe")
