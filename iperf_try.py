@@ -52,7 +52,7 @@ def run_iperf_client_process(num_of_transactions, my_quque):
     result = subprocess.Popen(command,stdout=subprocess.PIPE)
 
     for line in result.stdout:
-        print("Client reports: adding new line from iperf report --> queue ")
+        print("Client report: adding new line from iperf report --> queue ")
         my_quque.put(line.decode())
 
     print(f"Client is Done, checking to see if iperf server alive - if so will add msg into queue to kill iperf server")
@@ -69,7 +69,7 @@ def reporter_process(my_quque, stoping_msg):
 
 
 if __name__ == "__main__":
-    print("Number of cpu : ", multiprocessing.cpu_count())
+    print("Number of cpus is : ", multiprocessing.cpu_count())
     my_quque = Queue()
 
     handle_iperf_process_is_running("iperf3.exe")
