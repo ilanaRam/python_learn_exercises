@@ -96,7 +96,8 @@ def named_tuple_simple_example():
 
 
 def named_tuple_excersize():
-    Student = namedtuple('Student','Name, Id, Class, Marks')
+    Student = namedtuple('Student',
+                         'Name, Id, Class, Marks')
 
     students_list = []
     num_of_students = 0

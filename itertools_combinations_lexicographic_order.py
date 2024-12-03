@@ -77,6 +77,8 @@ def print_permutations(my_str, k):
     for i in range(1,k + 1):
         for combo in combinations(sorted(my_str), i):
             print(f"{''.join(combo)}")
+            # print(f"{combo}") this way we will get ('A','B')
+            # print(list(combo)) here we will get: ['A', 'K'] .....
     
 
 

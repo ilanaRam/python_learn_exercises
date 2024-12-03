@@ -12,17 +12,18 @@ def main():
             break    
         except Exception as ee:
             print(ee)
-        finally: 
-            continue
+
     print(f"Please enter {num_test_cases} of pairs (a b) folowed by enter ")
     while num_test_cases: 
         a , b = input().split()
         try: 
-            res = int(a) / int(b)        
+            res = int(a) / int(b)
+            print(res)
         except ZeroDivisionError as ee: 
             print(f"Error Code: {ee}") 
         except ValueError as ee:
-            print(f"Error Code: {ee}") 
+            print(f"Error Code: {ee}")
+        num_test_cases -= 1
 
 if __name__ == '__main__':
     main()

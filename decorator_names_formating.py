@@ -17,6 +17,10 @@ def person_lister(func):
 def name_format(person):
     return ("Mr. " if person[3] == "M" else "Ms. ") + person[0] + " " + person[1]
 
+
+
+
+
 if __name__ == '__main__':
     people = [
             ['Mike Thomson 20 M'],
