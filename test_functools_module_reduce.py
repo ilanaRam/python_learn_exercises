@@ -1,6 +1,7 @@
 from functools import reduce
 import math
 from fractions import Fraction
+import pytest  # this one I need for using a fixture of setup_and_teardown()
 
 
 # first arg - initial (is optional arg) if used must be most left argument
@@ -72,94 +73,140 @@ def fractonal_nums_product_func(tmp,
     return tmp * item_from_list
 
 # ============================================================
+my_list = [1,2,3,4,5]
+@pytest.fixture(scope="module")
+def setup_and_teardown():    
+    print(f"Test - Started")    
+    print(f"The list is ready to use: {my_list}")
+    yield
+    print(f"Test is - Done")
 
 
-if __name__ == '__main__': 
-
-    my_list = [1,2,3,4,5]
-    
-
+@pytest.mark.usefixtures("setup_and_teardown")
+def test_sum_test_resuce():
     # sum list items
     my_sum = reduce(sum_func, 
                     my_list)
     print(f"The sum of the list is: {my_sum}")
+    assert my_sum == 15
 
 
-
+@pytest.mark.usefixtures("setup_and_teardown")
+def test_sum_squers_reduce():    
     # sum squares(numbers) in a list
     my_sum_of_squares = reduce(sum_squares_func, 
                                my_list,
                                0)
     print(f"The sum of squares is: {my_sum_of_squares}")
+    assert my_sum_of_squares == 55
 
-
-
+@pytest.mark.usefixtures("setup_and_teardown")
+def test_multipy_reduce():
     # make multiply list items
     my_mult = reduce(multiply_func, my_list)
     print(f"The multiply of the list is: {my_mult}")
+    assert my_mult == 120
 
-
-
+@pytest.mark.usefixtures("setup_and_teardown")
+def test_find_bigest_reduce():
     # Find biggest item in the list 
     my_big = reduce(find_bigger_func, my_list)
     print(f"The bigest element in the list is: {my_big}")
+    assert my_big == 5
 
-
-
+@pytest.mark.usefixtures("setup_and_teardown")
+def test_find_smallest_reduce():
     # Find smallest item in the list
     my_small = reduce(find_smaller_func, my_list)
     print(f"The smallest element in the list is: {my_small}")
+    assert my_small == 1
 
 
+@pytest.mark.usefixtures("setup_and_teardown")
+def test_reverse_list():
+    # Reverse the list    
+    new_list = reduce(revers_func, 
+                      my_list,
+                      [])  # initial empty list - I will build this list          
+    print(f"The reversed list is: {new_list}")
+    assert new_list == [5, 4, 3, 2, 1]
 
+    
+def test_concat_all_strings_in_list_reduce():
     # Concatenate all strings in the list
     list_of_strings = ["HELLOW", " ", "WORLD", " ", "I", " ", "am", " " ,"here"]
+
     concatinated_list = reduce(concat_two_strings, list_of_strings)
     print(f"Concatinated string is: {concatinated_list}")
+    assert concatinated_list == "HELLOW WORLD I am here"
 
 
-
+def test_find_num_of_occurences_item_in_list():
     # !!!!
     # Find number of occurences of item in the list
     # !!!! reduce can get maximum 3 items - the third one is 'initial'
     items_lst = [1, 2, 3, 4, 1, 5, 1, 6 ,1] # here we have 1, 4 times    
+    
     num_of_ccurances = reduce(num_of_ccurances_func, # the func that will work with the list and will do all the work
                               items_lst,             # a list to work with                                                 
                               0)                     # 'initial' = here we set it with 0 as initial value for cnt    
     print(f"The amount of occurances of item 1 in the list is: {num_of_ccurances}")
+    assert num_of_ccurances == 4
 
 
-
-    # Reverse the list    
-    items_lst = [1, 2, 3, 4]    
-    new_list = reduce(revers_func, 
-                      items_lst,
-                      [])  # initial empty list - I will build this list          
-    print(f"The reversed list is: {new_list}")
-
-
-
+def test_flatten_the_list():
     # Flatten the list of lists to be: [1,2,3,4,5,6,7,8,9]  
     d3_lst = [[1, 2, 3],
               [4, 5, 6],
-              [7, 8, 9]]      
+              [7, 8, 9]]    
+      
     new_list = reduce(flatten_func, 
                       d3_lst,
                       [])  # initial empty list - I will build this flatten list          
     print(f"The flatten list is: {new_list}")
+    assert new_list == [1,2,3,4,5,6,7,8,9]
 
 
-
+def test_find_gcd():
     # Find GCD - greates common devider 
-    my_list = [4,4,4,4,3]
+    my_list = [4,4,4,4,5]
     my_gcd = reduce(gcd_finder_func, 
                     my_list)
     print(f"The gcd is: {my_gcd}")
+    assert my_gcd == 1
 
 
+def test_find_product_of_fractional_nums():
     # Find product of fractional nums (exp: 1/2*3/4*10/6 = 5/8)  
     my_list = [Fraction("1/2"), Fraction("3/4"), Fraction("10/6")]
+   
     my_product = reduce(fractonal_nums_product_func, 
                         my_list)
     print(f"The gcd is: {my_product}")
+    assert my_product ==  Fraction("5/8")  
+
+
+# 11 tests: 
+
+test_sum_test_resuce()
+test_sum_squers_reduce()
+test_multipy_reduce()
+test_find_bigest_reduce()
+test_find_smallest_reduce()
+test_concat_all_strings_in_list_reduce()
+test_find_num_of_occurences_item_in_list()
+test_reverse_list()
+test_flatten_the_list()
+test_find_gcd()
+test_find_product_of_fractional_nums()
+
+# run these 11 test from Terminal by cmd: 
+# pytest test_functools_module_reduce.py
+   
+
+    
+
+
+
+    
 
