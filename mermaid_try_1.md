@@ -1,19 +1,31 @@
 ```mermaid
 
 flowchart TD;
-    
-    setup_dev((Setup))
-    style setup_dev fill:yellow    
+    subgraph Dev
+        setup_dev((Setup))
+        style setup_dev fill:yellow    
+            
+        bci{{Build Container Image In Dev}}
+        style bci fill:blue
+
+        bci_Lima(Lima)
+        bci_buildpacks(Cloud Native Buildpacks / CNB)
+        bci_kbld(Carvel kbld)
+        registry{{Store Container Image In Registry}}
         
-    bci{{Build Container Image In Dev}}
-    style bci fill:blue
+        
+        setup_dev --> bci
+        bci --> bci_Lima --> registry
+        bci --> bci_buildpacks --> registry
+        bci --> bci_kbld --> registry
+        style registry fill:red
+    end
 
-    bci_Lima(Lima)
-    bci_buildpacks(Cloud Native Buildpacks / CNB)
+    subgraph Previews
+    style Previews fill:green
+    end
 
+    Dev --> Previews
 
-    setup_dev --> bci
-    bci --> bci_Lima
-    bci --> bci_buidpacks
 
 ```
