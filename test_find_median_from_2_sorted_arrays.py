@@ -8,6 +8,8 @@ class Solution(object):
     # if number of elements is odd, then it is the elem in the middle
     """
     def findMedianSortedArrays(self, nums1: List, nums2: List): 
+        # The solution is very easy - add both lists - create 1 list, sort it, find meadian !!
+
         # combine lists into 1 list (list will come after a list)
         new_list = nums1 + nums2
         print(f"the new list = {new_list}")
