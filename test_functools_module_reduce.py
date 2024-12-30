@@ -187,7 +187,7 @@ def test_find_product_of_fractional_nums():
 
 
 # 11 tests: 
-
+test_flatten_the_list()
 test_sum_test_resuce()
 test_sum_squers_reduce()
 test_multipy_reduce()
@@ -196,7 +196,6 @@ test_find_smallest_reduce()
 test_concat_all_strings_in_list_reduce()
 test_find_num_of_occurences_item_in_list()
 test_reverse_list()
-test_flatten_the_list()
 test_find_gcd()
 test_find_product_of_fractional_nums()
 
