@@ -47,9 +47,7 @@ def check_format_phone_numbers(func):
                     continue
         print(f"\n\nFinished formating nums ....")
 
-
         func(formated_nums)
-
 
         print("After calling 'func'")
     return wrapper

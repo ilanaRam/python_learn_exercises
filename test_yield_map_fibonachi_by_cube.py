@@ -13,16 +13,13 @@ def fibo_gen(n):
         n -= 1
 
 def create_fibonachi_seria(fibo_len):
-    fibo_list = []
-    
-    # create generator (factory) for 5 fibo elems - it kind of 5 place holders 
+    fibo_list = []     
+
     gen = fibo_gen(fibo_len)    
 
-    # here we use the generator to generate each time new fibo elem
     for i in gen:       
        print(f"fibo elem received from gen:{i}")
        fibo_list.append(i)
-
     return fibo_list
 
 
