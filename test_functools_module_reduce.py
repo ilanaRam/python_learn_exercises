@@ -26,7 +26,7 @@ def find_smaller_func(a,b):
     return a if a<b else b
 
 def concat_two_strings(a,b):    
-    return f"{a}{b}"
+    return a+b
 
 # !!!!!
 def num_of_ccurances_func(cnt_to_update,   # !! initial - must be located as most left argument
@@ -47,9 +47,9 @@ def num_of_ccurances_func(cnt_to_update,   # !! initial - must be located as mos
 
 # way2: user new_list.insert(0,item_from_list)
 
-def revers_func(new_list,
-                item_from_list):    
-    new_list = [item_from_list] + new_list
+def revers_func(item1, # we deliver the initialy the [] empty list
+                item2):    
+    new_list = [item2] + item1
     return new_list
     
 def flatten_func(empty_new_list, 
@@ -63,9 +63,11 @@ def sum_squares_func(squares_sum, item_from_list):
     
     return squares_sum + item_from_list**2
 
-def gcd_finder_func(tmp, 
-                    item_from_list):
-    new_gcd = math.gcd(tmp,item_from_list)
+def gcd_finder_func(item1_from_list, 
+                    item2_from_list):
+    
+    new_gcd = math.gcd(item1_from_list,
+                       item2_from_list)
     return new_gcd
 
 def fractonal_nums_product_func(tmp,
@@ -74,7 +76,7 @@ def fractonal_nums_product_func(tmp,
 
 # ============================================================
 my_list = [1,2,3,4,5]
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="module") # autouse=True
 def setup_and_teardown():    
     print(f"Test - Started")    
     print(f"The list is ready to use: {my_list}")
@@ -83,7 +85,7 @@ def setup_and_teardown():
 
 
 @pytest.mark.usefixtures("setup_and_teardown")
-def test_sum_test_resuce():
+def test_sum_test_reduce():
     # sum list items
     my_sum = reduce(sum_func, 
                     my_list)
@@ -127,18 +129,19 @@ def test_reverse_list():
     # Reverse the list    
     new_list = reduce(revers_func, 
                       my_list,
-                      [])  # initial empty list - I will build this list          
+                      [])  # initial empty list - the new list will be started with first item - which is a list of single item - empty list          
     print(f"The reversed list is: {new_list}")
     assert new_list == [5, 4, 3, 2, 1]
 
     
 def test_concat_all_strings_in_list_reduce():
     # Concatenate all strings in the list
-    list_of_strings = ["HELLOW", " ", "WORLD", " ", "I", " ", "am", " " ,"here"]
+    list_of_strings = ["HELLOW", " MY", " WORLD", " ", "I", " ", "am", " " ,"here"]
 
-    concatinated_list = reduce(concat_two_strings, list_of_strings)
+    concatinated_list = reduce(concat_two_strings, 
+                               list_of_strings)
     print(f"Concatinated string is: {concatinated_list}")
-    assert concatinated_list == "HELLOW WORLD I am here"
+    assert concatinated_list == "HELLOW MY WORLD I am here"
 
 
 def test_find_num_of_occurences_item_in_list():
@@ -187,17 +190,17 @@ def test_find_product_of_fractional_nums():
 
 
 # 11 tests: 
-test_flatten_the_list()
-test_sum_test_resuce()
-test_sum_squers_reduce()
-test_multipy_reduce()
-test_find_bigest_reduce()
-test_find_smallest_reduce()
+# test_flatten_the_list()
+# test_sum_test_reduce()
+# test_sum_squers_reduce()
+# test_multipy_reduce()
+# test_find_bigest_reduce()
+# test_find_smallest_reduce()
 test_concat_all_strings_in_list_reduce()
-test_find_num_of_occurences_item_in_list()
-test_reverse_list()
-test_find_gcd()
-test_find_product_of_fractional_nums()
+# test_find_num_of_occurences_item_in_list()
+# test_reverse_list()
+# test_find_gcd()
+# test_find_product_of_fractional_nums()
 
 # run these 11 test from Terminal by cmd: 
 # pytest test_functools_module_reduce.py
